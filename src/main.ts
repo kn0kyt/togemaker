@@ -263,12 +263,24 @@ aspectGroup.addEventListener('click', (e) => {
 })
 
 saveBtn.addEventListener('click', () => {
-  canvas.toBlob((blob) => {
+  canvas.toBlob(async (blob) => {
     if (!blob) return
+    const filename = `togemaker-${aspect.replace(':', 'x')}-${seed.toString(16)}.png`
+    const file = new File([blob], filename, { type: 'image/png' })
+    // iOS/Android では共有シートを開く（写真アプリへの保存や X への直接投稿ができる）
+    if (navigator.canShare?.({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file] })
+        return
+      } catch (e) {
+        if ((e as DOMException).name === 'AbortError') return // ユーザーがキャンセル
+        // 共有シートが開けなかった場合はダウンロードにフォールバック
+      }
+    }
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `togemaker-${aspect.replace(':', 'x')}-${seed.toString(16)}.png`
+    a.download = filename
     a.click()
     URL.revokeObjectURL(url)
   })
