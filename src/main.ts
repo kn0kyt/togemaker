@@ -267,8 +267,10 @@ saveBtn.addEventListener('click', () => {
     if (!blob) return
     const filename = `togemaker-${aspect.replace(':', 'x')}-${seed.toString(16)}.png`
     const file = new File([blob], filename, { type: 'image/png' })
-    // iOS/Android では共有シートを開く（写真アプリへの保存や X への直接投稿ができる）
-    if (navigator.canShare?.({ files: [file] })) {
+    // タッチ主体のデバイス（iOS/Android）のみ共有シートを開く（写真アプリへの保存や
+    // X への直接投稿ができる）。PC は共有ダイアログより素直なダウンロードを優先する
+    const isTouchDevice = matchMedia('(pointer: coarse)').matches
+    if (isTouchDevice && navigator.canShare?.({ files: [file] })) {
       try {
         await navigator.share({ files: [file] })
         return
