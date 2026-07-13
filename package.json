@@ -1,0 +1,19 @@
+{
+  "name": "togemaker",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "setup": "node scripts/setup-assets.mjs"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "onnxruntime-web": "^1.27.0"
+  }
+}

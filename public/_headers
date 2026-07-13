@@ -1,0 +1,9 @@
+# Cloudflare Pages 用レスポンスヘッダー
+# COOP/COEP: crossOriginIsolated を有効にしてマルチスレッド WASM (SharedArrayBuffer) を使う
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+
+# モデルチャンクは不変なので長期キャッシュ（更新時はファイル名を変える）
+/models/*
+  Cache-Control: public, max-age=31536000, immutable

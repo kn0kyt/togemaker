@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+# ローカル検証用のテスト画像（個人の写真・著作物のためリポジトリに含めない。public/ 外なのでビルドにも入らない）
+test.local.png
+# モデルの元ファイル（fp32 179MB / int8 46MB）。配信用の分割チャンクは public/models/ にコミットする。
+# 再生成手順は docs/guides/deployment.md 参照（npm run setup → 量子化 → 分割）
+models-src/
+.claude/settings.local.json

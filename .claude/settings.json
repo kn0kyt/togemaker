@@ -1,0 +1,15 @@
+{
+  "autoMemoryEnabled": true,
+  "permissions": {
+    "allow": [
+      "Bash(git:*)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Edit(.env)",
+      "Edit(.env.*)",
+      "Bash(rm -rf:*)"
+    ]
+  }
+}
