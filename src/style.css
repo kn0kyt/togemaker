@@ -310,8 +310,24 @@ input[type='range']::-moz-range-thumb {
 }
 
 @media (max-width: 640px) {
+  /* モバイルは 1 画面固定をやめ、canvas を画面幅いっぱいに表示してページスクロールで見せる */
+  body {
+    overflow: auto;
+  }
+
   #app {
+    height: auto;
+    min-height: 100dvh;
     padding: 12px;
+  }
+
+  /* 横長は画面幅いっぱい、縦長(9:16)は画面の高さ 55% を上限にする（縦横比は維持される） */
+  #stage {
+    max-height: 55dvh;
+  }
+
+  .topbar {
+    gap: 4px 12px;
   }
 
   .proto-badge {
